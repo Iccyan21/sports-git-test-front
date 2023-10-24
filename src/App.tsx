@@ -9,6 +9,12 @@ import ArchiveDetail from './archive/archive-retail';
 import RegisterDataForm from './archive/archive-post';
 import ArchiveList from './archive/archive-list';
 import ArticleForm from './articleForm/articleform';
+import ArticlesList from './articleForm/articlelist';
+import ArticleDetail from './articleForm/article-detail';
+import ArchiveEdit from './archive/archive-edit';
+import ArchiveCreate from './archive/archive-create';
+import ArchiveDelete from './archive/archive-delete';
+
 
 function App() {
   return (
@@ -22,8 +28,12 @@ function App() {
            <Route path="movie-list/:title" element={<MovieList/>} />
            <Route path="post-create/" element={<PostAndMovieForm/>}/>
            <Route path="archive/" element={<ArchiveList/>}/>
+            <Route path="articles/" element={<ArticlesList/>}/>
            <Route path="articleform/" element={<ArticleForm/>}/>
-
+           <Route path="articles/detail/:title/" element={<ArticleDetail/>}/>
+           <Route path="/playarchive/edit-archive/:title" element={<ArchiveEdit/>}/>
+           <Route path="create-archive/"element={<ArchiveCreate/>}/>
+           <Route path="archive/delete/:title" element={<ArchiveDelete/>}/>
         </Routes>
         </BrowserRouter>
     </div>

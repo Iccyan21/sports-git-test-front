@@ -49,22 +49,34 @@ const RegisterDataForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        const data = {
-            title,
-            subtitle,
-            description,
-            movies
-        };
-
-        axios.post('http://127.0.0.1:8000/playarchive/create-archive/', data)
-            .then(() => {
-                setResponseMessage('Successfully registered!');
-            })
-            .catch(() => {
-                setResponseMessage('Failed to register data.');
-            });
+    
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('subtitle', subtitle);
+        formData.append('description', description);
+    
+        movies.forEach((movie, index) => {
+            formData.append(`movies.title`, movie.title);
+            if (movie.video) {
+                formData.append(`movies.video`, movie.video);
+            }
+        });
+    
+        axios.post('http://127.0.0.1:8000/playarchive/create-archive/', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(() => {
+            setResponseMessage('Successfully registered!');
+        })
+        .catch(() => {
+            setResponseMessage('Failed to register data.');
+        });
     };
+    
+    
+    
 
     return (
         <div>
